@@ -1,8 +1,12 @@
 package upeu.edu.pe.appsqlite;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,15 +17,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class PrincipalActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
 
+public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private TextView tv1;
+    Typeface typeface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        tv1 = (TextView) findViewById(R.id.tv1_nav);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -78,6 +88,12 @@ public class PrincipalActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id==R.id.action_salir){
+            //super.onBackPressed(); finishAffinity(); System.exit(0);
+            finish();
+            finishAffinity();
+            System.exit(0);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -87,14 +103,11 @@ public class PrincipalActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Fragment fragment = null;
         if (id == R.id.nav_camera) {
-            // Handle the camera action
-            Toast.makeText(this,"Soy Jonas",Toast.LENGTH_LONG).show();
-            getSupportFragmentManager().beginTransaction().replace(R.id.contenido, new GaleryFragment()).disallowAddToBackStack().commit();
 
         } else if (id == R.id.nav_gallery) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenido, new GaleryFragment()).disallowAddToBackStack().commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -102,6 +115,8 @@ public class PrincipalActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+
+        }else if (id == R.id.nav_jonas) {
 
         }
 
